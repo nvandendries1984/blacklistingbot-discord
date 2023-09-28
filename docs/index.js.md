@@ -1,60 +1,60 @@
-# Discord bone with slash commands and mysql integration
+# Discord Bot met Slash-commando's en MySQL-integratie
 
-This Markdown document contains documentation for the given Node.js code, which implements a Discord-Bot with Slash commands and integration with a MySQL database.
+Dit Markdown-document bevat documentatie voor de gegeven Node.js-code, die een Discord-bot implementeert met slash-commando's en integratie met een MySQL-database.
 
-## required libraries
+## Vereiste bibliotheken
 
-The code uses various external libraries, which are imported at the start of the script:
+De code maakt gebruik van verschillende externe bibliotheken, die aan het begin van het script worden geïmporteerd:
 
-- "Discord.js": a library for working with the Discord API.
-- `@Discordjs/Rest`: a library for managing Discord Rest calls.
--`Discord api types/V9`: Type definitions for Discord API.
-- `Dotv`: a library for loading environment variables from a '. andv' file.
-- `Winston`: a logger for keeping track of events and mistakes.
-- `@discordjs/builders`: a tool for building slash commands.
-- `MySQL2`: a library for working with MySQL databases.
+- `discord.js`: Een bibliotheek voor het werken met de Discord API.
+- `@discordjs/rest`: Een bibliotheek voor het beheren van Discord REST-aanroepen.
+- `discord-api-types/v9`: Typedefinities voor Discord API.
+- `dotenv`: Een bibliotheek voor het laden van omgevingsvariabelen uit een `.env`-bestand.
+- `winston`: Een logger voor het bijhouden van gebeurtenissen en fouten.
+- `@discordjs/builders`: Een hulpmiddel voor het bouwen van slash-commando's.
+- `mysql2`: Een bibliotheek voor het werken met MySQL-databases.
 
-## Configuration
+## Configuratie
 
-The code reads various configuration variables from a `. Andv` file, including Discord token, database settings and logging settings.
+De code leest verschillende configuratievariabelen uit een `.env`-bestand, waaronder Discord-token, database-instellingen en logging-instellingen.
 
-## Logger-Configuration
+## Logger-configuratie
 
-A logger is configured with the help of the `Winston" library to create log files and set log levels, depending on the value of 'logging_enabled' from the environment variables.
+Een logger wordt geconfigureerd met behulp van de `winston`-bibliotheek om logbestanden te maken en logniveaus in te stellen, afhankelijk van de waarde van `LOGGING_ENABLED` uit de omgevingsvariabelen.
 
-## Discord client initialization
+## Discord-client initialisatie
 
-A Discord-Bot client is initialized with some required intentions and configuration information.
+Een Discord-bot-client wordt geïnitialiseerd met enkele vereiste intenties en configuratie-informatie.
 
-## Database binding pool
+## Databaseverbindingenpool
 
-A MySQL database binding pool is made using the "MySQL2" library to manage connections to the database.
+Een MySQL-databaseverbindingenpool wordt gemaakt met behulp van de `mysql2`-bibliotheek om verbindingen met de database te beheren.
 
-## slash commands
+## Slash-commando's
 
-Two Slash commands are defined with the help of `slash commandbuilder` and converted to JSON objects.
+Twee slash-commando's worden gedefinieerd met behulp van `SlashCommandBuilder` en geconverteerd naar JSON-objecten.
 
-## command registration
+## Commando-registratie
 
-The Slash commands are registered with Discord using the Discord Rest API via the `@Discordjs/Rest` library.
+De slash-commando's worden geregistreerd bij Discord met behulp van de Discord REST API via de `@discordjs/rest`-bibliotheek.
 
-## Discord client events
+## Discord-cliëntgebeurtenissen
 
-- "Ready": an event that is activated when the bot is successfully logged in to Discord.
-- "InteractionCreate": an event that is activated when an interaction takes place, such as the use of a Slash command.
+- `ready`: Een gebeurtenis die wordt geactiveerd wanneer de bot succesvol is ingelogd op Discord.
+- `interactionCreate`: Een gebeurtenis die wordt geactiveerd wanneer er een interactie plaatsvindt, zoals het gebruik van een slash-commando.
 
-## slash-command handler
+## Slash-commando-handler
 
-The interactions arrived are processed within the 'InteractionCreate' event.If it is a slash command, the name and options are extracted.
+Binnen de `interactionCreate`-gebeurtenis worden de binnengekomen interacties verwerkt. Als het een slash-commando is, wordt de naam en de opties ervan geëxtraheerd.
 
-- The "Ping" command answers with "Pong!".
-- The 'check` command checks whether a username is present in the database by performing a query to the database.
+- Het `ping`-commando antwoordt met "Pong!".
+- Het `check`-commando controleert of een gebruikersnaam in de database aanwezig is door een query naar de database uit te voeren.
 
-## Bot-Start
+## Bot-start
 
-Finally, the bone is logged in using the Discord token that has previously been configured.
+Tenslotte wordt de bot ingelogd met behulp van de Discord-token die eerder is geconfigureerd.
 
-This is a general explanation of the code.Consult the code and comments in the code for more specific details and implementation details.
+Dit is een algemene uitleg van de code. Raadpleeg de code en opmerkingen in de code voor meer specifieke details en implementatiedetails.
 
-## Development Team
-* Niels van den Dries - niels@nvandendries.nl
+## Development team
+* Niels van den Dries - Niels@nvandendries.nl
