@@ -55,3 +55,6 @@ Binnen de `interactionCreate`-gebeurtenis worden de binnengekomen interacties ve
 Tenslotte wordt de bot ingelogd met behulp van de Discord-token die eerder is geconfigureerd.
 
 Dit is een algemene uitleg van de code. Raadpleeg de code en opmerkingen in de code voor meer specifieke details en implementatiedetails.
+
+## Development team
+* Niels van den Dries - Niels@nvandendries.nl
