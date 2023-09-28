@@ -27,7 +27,9 @@ client.once('ready', () => {
 });
 
 client.on('messageCreate', (message) => {
-  logger.info(`Received message: ${message.content}`);
+  logger.info(`Received message: "${message.content}"`);
+  logger.info(`Message author: ${message.author.tag}`);
+  logger.info(`Message ID: ${message.id}`);
   
   if (message.content === '!ping') {
     logger.info('!ping command received.');
