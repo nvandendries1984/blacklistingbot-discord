@@ -43,19 +43,19 @@ const db = mysql.createConnection({
 
 db.connect((err) => {
   if (err) {
-    logger.error('Fout bij verbinden met de database: ', err);
+    logger.error('Error connecting to the database: ', err);
     return;
   }
-  logger.info('Verbonden met de database.');
+  logger.info('Connected to the database.');
 });
 
 const commands = [
   new SlashCommandBuilder()
     .setName('check')
-    .setDescription('Controleert of een gebruikersnaam in de database staat')
+    .setDescription('Checks whether a username is in the database')
     .addStringOption(option =>
       option.setName('username')
-        .setDescription('De gebruikersnaam om te controleren')
+        .setDescription('The username to check')
         .setRequired(true)),
 ].map(command => command.toJSON());
 
@@ -92,8 +92,8 @@ client.on('interactionCreate', async (interaction) => {
     if (db.state === 'disconnected') {
       db.connect((err) => {
         if (err) {
-          console.error('Fout bij verbinden met de database: ', err);
-          interaction.reply('Er is een fout opgetreden bij het controleren van de gebruikersnaam.');
+          console.error('Error connecting to the database: ', err);
+          interaction.reply('An error occurred while checking the username.');
           return;
         }
         executeQuery();
@@ -106,15 +106,15 @@ client.on('interactionCreate', async (interaction) => {
       // Voer een databasequery uit om de gebruikersnaam te controleren
       db.query(`SELECT * FROM ${DB_TABLE} WHERE ${DB_COLUMN} = ?`, [username], (err, results) => {
         if (err) {
-          console.error('Fout bij databasequery: ', err);
-          interaction.reply('Er is een fout opgetreden bij het controleren van de gebruikersnaam.');
+          console.error('Database query error: ', err);
+          interaction.reply('An error occurred while checking the username.');
           return;
         }
 
         if (results.length > 0) {
-          interaction.reply('De gebruikersnaam is gevonden in de database.');
+          interaction.reply('The username was found in the database.');
         } else {
-          interaction.reply('De gebruikersnaam is niet gevonden in de database.');
+          interaction.reply('The username was not found in the database.');
         }
       });
     }
