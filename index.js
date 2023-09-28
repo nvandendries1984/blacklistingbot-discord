@@ -24,10 +24,11 @@ const client = new Client({
   intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages],
 });
 
+// Discord settings
 const TOKEN = process.env.DISCORD_TOKEN;
 const CLIENT_ID = process.env.DISCORD_CLIENT_ID;
-const GUILD_ID = process.env.DISCORD_GUILD_ID;
 
+// Database settings
 const DB_HOST = process.env.DB_HOST;
 const DB_USER = process.env.DB_USER;
 const DB_PASSWORD = process.env.DB_PASSWORD;
@@ -46,6 +47,9 @@ const pool = mysql.createPool({
 
 const commands = [
   new SlashCommandBuilder()
+  .setName('ping')
+  .setDescription('Replies with Pong!'),
+  new SlashCommandBuilder()
     .setName('check')
     .setDescription('Checks whether a username is in the database')
     .addStringOption(option =>
@@ -59,6 +63,11 @@ const rest = new REST({ version: '10' }).setToken(TOKEN);
 (async () => {
   try {
     logger.info('Started refreshing application (/) commands.');
+
+    await rest.put(
+      Routes.applicationCommands(CLIENT_ID), // Dit registreert slash-commando's op de globale toepassing
+      { body: commands },
+    );
 
     logger.info('Successfully reloaded application (/) commands.');
   } catch (error) {
@@ -74,6 +83,11 @@ client.on('interactionCreate', async (interaction) => {
     if (!interaction.isCommand()) return;
   
     const { commandName, options } = interaction;
+
+    if (commandName === 'ping') {
+      // Beantwoord met een eenvoudig bericht
+      await interaction.reply('Pong!');
+    }
   
     if (commandName === 'check') {
       const username = options.getString('username');
