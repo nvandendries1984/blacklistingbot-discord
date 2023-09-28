@@ -60,11 +60,6 @@ const rest = new REST({ version: '10' }).setToken(TOKEN);
   try {
     logger.info('Started refreshing application (/) commands.');
 
-    await rest.put(
-      Routes.applicationGuildCommands(CLIENT_ID, GUILD_ID),
-      { body: commands },
-    );
-
     logger.info('Successfully reloaded application (/) commands.');
   } catch (error) {
     logger.error(error);
