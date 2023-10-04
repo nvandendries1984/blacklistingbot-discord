@@ -114,8 +114,8 @@ client.on('interactionCreate', async (interaction) => {
       // Gebruik de databaseverbindingenpool om een verbinding te verkrijgen
       pool.getConnection((err, connection) => {
         if (err) {
-          logger.error('Error getting a database connection: ', err);
-          interaction.reply('An error occurred while processing the command.');
+          logger.error('Fuck!!, Error getting a database connection: ', err);
+          interaction.reply('Fuck!!, An error occurred while processing the command.');
           return;
         }
     
@@ -126,7 +126,7 @@ client.on('interactionCreate', async (interaction) => {
     
           if (queryErr) {
             logger.error('Database query error: ', queryErr);
-            interaction.reply('An error occurred while processing the command.');
+            interaction.reply('Fuck!!, An error occurred while processing the command.');
             return;
           }
     
@@ -142,8 +142,8 @@ client.on('interactionCreate', async (interaction) => {
       // Gebruik de databaseverbindingenpool om een verbinding te verkrijgen
       pool.getConnection((err, connection) => {
         if (err) {
-          logger.error('Error getting a database connection: ', err);
-          interaction.reply('An error occurred while checking the username.');
+          logger.error('Fuck!!, Error getting a database connection: ', err);
+          interaction.reply('Fuck!!, An error occurred while checking the username.');
           return;
         }
   
@@ -154,7 +154,7 @@ client.on('interactionCreate', async (interaction) => {
   
           if (queryErr) {
             logger.error('Database query error: ', queryErr);
-            interaction.reply('An error occurred while checking the username.');
+            interaction.reply('Fuck!!, An error occurred while checking the username.');
             return;
           }
   
