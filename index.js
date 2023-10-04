@@ -5,6 +5,7 @@ require('dotenv').config();
 const winston = require('winston');
 const { SlashCommandBuilder } = require('@discordjs/builders');
 const mysql = require('mysql2');
+const path = require('path');
 
 // Lees de waarde van LOGGING_ENABLED
 const LOGGING_ENABLED = process.env.LOGGING_ENABLED === 'true';
@@ -17,7 +18,7 @@ const logger = winston.createLogger({
       return `${timestamp} [${level.toUpperCase()}]: ${message}`;
     })
   ),
-  transports: LOGGING_ENABLED ? [new winston.transports.File({ filename: 'bot.log' })] : [],
+  transports: LOGGING_ENABLED ? [new winston.transports.File({ filename: path.resolve(__dirname, 'bot.log') })] : [],
 });
 
 const client = new Client({
