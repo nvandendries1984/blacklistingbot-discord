@@ -48,6 +48,9 @@ const pool = mysql.createPool({
 
 const commands = [
   new SlashCommandBuilder()
+  .setName('info')
+  .setDescription('Replies with information!'),
+  new SlashCommandBuilder()
   .setName('ping')
   .setDescription('Replies with Pong!'),
   new SlashCommandBuilder()
@@ -57,6 +60,13 @@ const commands = [
       option.setName('username')
         .setDescription('The username to check')
         .setRequired(true)),
+  new SlashCommandBuilder() // Voeg het nieuwe slash-commando toe
+  .setName('blacklistuser')
+  .setDescription('Blacklist a user')
+  .addStringOption(option =>
+    option.setName('username')
+      .setDescription('The username to blacklist')
+      .setRequired(true)),
 ].map(command => command.toJSON());
 
 const rest = new REST({ version: '10' }).setToken(TOKEN);
@@ -85,11 +95,47 @@ client.on('interactionCreate', async (interaction) => {
   
     const { commandName, options } = interaction;
 
+    // begin info command
+    if (commandName === 'info') {
+      // Beantwoord met een eenvoudig bericht
+      await interaction.reply('https://blacklistingbot.com/');
+    }
+    
+    // begin ping command
     if (commandName === 'ping') {
       // Beantwoord met een eenvoudig bericht
-      await interaction.reply('Pong!');
+      await interaction.reply('Pong, Bitch!');
+    }
+
+    // begin blacklist command
+    if (commandName === 'blacklistuser') {
+      const username = options.getString('username');
+    
+      // Gebruik de databaseverbindingenpool om een verbinding te verkrijgen
+      pool.getConnection((err, connection) => {
+        if (err) {
+          logger.error('Error getting a database connection: ', err);
+          interaction.reply('An error occurred while processing the command.');
+          return;
+        }
+    
+        // Voer een databasequery uit om de gebruikersnaam op te slaan in de database
+        connection.query(`INSERT INTO ${DB_TABLE} (${DB_COLUMN}) VALUES (?)`, [username], (queryErr) => {
+          // Geef de verbinding vrij voordat je reageert op de interactie
+          connection.release();
+    
+          if (queryErr) {
+            logger.error('Database query error: ', queryErr);
+            interaction.reply('An error occurred while processing the command.');
+            return;
+          }
+    
+          interaction.reply(`User '${username}' has been blacklisted.`);
+        });
+      });
     }
   
+    // begin check command
     if (commandName === 'check') {
       const username = options.getString('username');
   
